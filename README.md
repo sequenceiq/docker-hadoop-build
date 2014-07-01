@@ -21,4 +21,4 @@ docker run -it --name hadoop-build sequenceiq/hadoop-nativelibs /bin/bash
 docker cp hadoop-build:/tmp/hadoop-2.4.1-src/hadoop-dist/target/hadoop-2.4.1/lib/native/ DESTINATION
 ```
 
-_Note: the name `hadoop-build` is specified at the time when launching the container using `--name hadoop-build`
+_Note: the name `hadoop-build` is specified at the time when launching the container using `--name hadoop-build`_
