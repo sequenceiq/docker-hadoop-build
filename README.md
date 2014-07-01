@@ -7,10 +7,18 @@ Often when we use Apache Hadoop and would like to make a custom build (stock or 
 This Docker image contains the build process of Hadoop 2.4.1 nativelibs. Also the 64b version of nativelibs is released at http://dl.bintray.com/sequenceiq/sequenceiq-bin/hadoop-native-64-2.4.1.tar.
 
 ## Build the image 
+```
 docker build -t sequenceiq/hadoop-nativelibs .
+```
 
 ## Run the container
-docker run -it sequenceiq/hadoop-nativelibs /bin/bash
+```
+docker run -it --name hadoop-build sequenceiq/hadoop-nativelibs /bin/bash
+```
 
 ## Copy files from the container
-docker cp ID_OF_THE_CONTAINER:/tmp/hadoop-2.4.1-src/hadoop-dist/target/hadoop-2.4.1/lib/native/ DESTINATION
+```
+docker cp hadoop-build:/tmp/hadoop-2.4.1-src/hadoop-dist/target/hadoop-2.4.1/lib/native/ DESTINATION
+```
+
+_Note: the name `hadoop-build` is specified at the time when launching the container using `--name hadoop-build`
