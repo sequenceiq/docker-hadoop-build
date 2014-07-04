@@ -47,3 +47,6 @@ ENV export LD_RUN_PATH /usr/local/lib
 
 # build native libs
 RUN cd /tmp/hadoop-2.4.1-src && mvn package -Pdist,native -DskipTests -Dtar
+
+# get bintray helper
+RUN curl -Lo /tmp/bintray-functions j.mp/bintray-functions && . /tmp/bintray-functions
