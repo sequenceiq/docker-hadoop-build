@@ -16,7 +16,7 @@ docker build -t sequenceiq/hadoop-nativelibs .
 docker run -it --name hadoop-build sequenceiq/hadoop-nativelibs /bin/bash
 ```
 
-## Run the container and publish the native builds to bintray
+## Run the container and publish to bintray
 
 ```
 docker run -it -e BINTRAY_USER=xxx -e BINTRAY_KEY=xxx --name hadoop-build sequenceiq/hadoop-nativelibs /bin/bash
