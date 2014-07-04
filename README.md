@@ -6,7 +6,7 @@ Often when we use Apache Hadoop and would like to make a custom build (stock or 
 
 This Docker image contains the build process of Hadoop 2.4.1 nativelibs. Also the 64b version of nativelibs is released at our [RPM repository](http://dl.bintray.com/sequenceiq/sequenceiq-bin/hadoop-native-64-2.4.1.tar).
 
-## Build the image 
+## Build the image
 ```
 docker build -t sequenceiq/hadoop-nativelibs .
 ```
@@ -16,9 +16,18 @@ docker build -t sequenceiq/hadoop-nativelibs .
 docker run -it --name hadoop-build sequenceiq/hadoop-nativelibs /bin/bash
 ```
 
+## Run the container and publish the native builds to bintray
+
+```
+docker run -it -e BINTRAY_USER=xxx -e BINTRAY_KEY=xxx --name hadoop-build sequenceiq/hadoop-nativelibs /bin/bash
+```
+
 ## Copy files from the container
 ```
 docker cp hadoop-build:/tmp/hadoop-2.4.1-src/hadoop-dist/target/hadoop-2.4.1/lib/native/ DESTINATION
 ```
 
 _Note: the name `hadoop-build` is specified at the time when launching the container using `--name hadoop-build`_
+
+
+docker run -it -e BINTRAY_USER=matyix -e BINTRAY_KEY=3549c7eb38286af9f68326756fab096f2e7f4c3e -name hadoop-build sequenceiq/hadoop-nativelibs /bin/bash
