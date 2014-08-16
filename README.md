@@ -29,5 +29,3 @@ docker cp hadoop-build:/tmp/hadoop-2.4.1-src/hadoop-dist/target/hadoop-2.4.1/lib
 
 _Note: the name `hadoop-build` is specified at the time when launching the container using `--name hadoop-build`_
 
-
-docker run -it -e BINTRAY_USER=matyix -e BINTRAY_KEY=3549c7eb38286af9f68326756fab096f2e7f4c3e -name hadoop-build sequenceiq/hadoop-nativelibs /bin/bash
