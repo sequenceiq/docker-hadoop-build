@@ -2,29 +2,31 @@ docker-hadoop-build
 ===================
 
 ## Build Apache Hadoop
-Often when we use Apache Hadoop and would like to make a custom build (stock or forked) you'll have to rebuild the whole Hadoop, native libs, etc ... which takes 30+ minutes, and carries lots of dependencies (libraries, protobuf, etc - at a given version).
+Often when we use Apache Hadoop and would like to make a custom build (stock or forked) you'll have to 
+rebuild the whole Hadoop, native libs, etc ... which takes 30+ minutes, and carries lots of dependencies
+(libraries, protobuf, etc - at a given version).
 
-This Docker image contains the build process of Hadoop 2.6.0 nativelibs. Also the 64b version of `nativelibs` is released at our [RPM repository](http://dl.bintray.com/sequenceiq/sequenceiq-bin/hadoop-native-64-2.6.0.tar).
+This Docker image contains the build process of Hadoop 2.7.0 nativelibs. Also the 64b version of `nativelibs`
+is released at our [RPM repository](http://dl.bintray.com/sequenceiq/sequenceiq-bin/hadoop-native-64-2.7.0.tar).
 
 ## Build the image
 ```
 docker build -t sequenceiq/hadoop-nativelibs .
 ```
 
-## Run the container
+## Release libs to bintray
+
+Steps needed:
+- Copy the tarred libs from docker container
+- Create a new version on bintray
+- Upload the tarred libs to bintray
+
 ```
-docker run -it --name hadoop-build sequenceiq/hadoop-nativelibs /bin/bash
+docker run --rm  sequenceiq/hadoop-nativelibs > hadoop-native-64-2.7.0.tar
+curl -Lo /tmp/bintray-functions j.mp/bintray-functions && . /tmp/bintray-functions
+bint-upload-with-version sequenceiq sequenceiq-bin hadoop-native-64bit 2.7.0 hadoop-native-64-2.7.0.tar
 ```
 
-## Run the container
+## TODO
 
-```
-docker run -it --name hadoop-build sequenceiq/hadoop-nativelibs /bin/bash
-```
-
-## Copy files from the container
-```
-docker cp hadoop-build:/tmp/hadoop-2.6.0-src/hadoop-dist/target/hadoop-2.6.0/lib/native/ DESTINATION
-```
-
-_Note: the name `hadoop-build` is specified at the time when launching the container using `--name hadoop-build`_
+create a Makefile to fully automate the release

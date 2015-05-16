@@ -31,8 +31,9 @@ RUN yum groupinstall "Development Tools" -y
 RUN yum install -y cmake zlib-devel openssl-devel
 
 # maven
-RUN curl http://www.eu.apache.org/dist/maven/maven-3/3.2.1/binaries/apache-maven-3.2.1-bin.tar.gz|tar xz  -C /usr/share
-ENV M2_HOME /usr/share/apache-maven-3.2.1
+ENV M2_VER=3.2.5
+RUN curl http://www.eu.apache.org/dist/maven/maven-3/${M2_VER}/binaries/apache-maven-${M2_VER}-bin.tar.gz|tar xz  -C /usr/share
+ENV M2_HOME /usr/share/apache-maven-${M2_VER}
 ENV PATH $PATH:$M2_HOME/bin
 
 # hadoop
@@ -48,5 +49,9 @@ ENV export LD_RUN_PATH /usr/local/lib
 # build native libs
 RUN cd /tmp/hadoop-2.7.0-src && mvn package -Pdist,native -DskipTests -Dtar
 
+# tar to stdout
+CMD tar -cv -C /tmp/hadoop-2.7.0-src/hadoop-dist/target/hadoop-2.7.0/lib/native/ .
+
+# docker run --rm  sequenceiq/hadoop-nativelibs > x.tar
 # get bintray helper
 #RUN curl -Lo /tmp/bintray-functions j.mp/bintray-functions && . /tmp/bintray-functions
