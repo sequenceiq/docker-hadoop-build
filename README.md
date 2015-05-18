@@ -26,6 +26,7 @@ docker run --rm  sequenceiq/hadoop-nativelibs > hadoop-native-64-2.7.0.tar
 curl -Lo /tmp/bintray-functions j.mp/bintray-functions && . /tmp/bintray-functions
 bint-upload-with-version sequenceiq sequenceiq-bin hadoop-native-64bit 2.7.0 hadoop-native-64-2.7.0.tar
 ```
+*Note: you will need to set your `BINTRAY_KEY` and `BINTRAY_USER` as environment variables*
 
 ## TODO
 
